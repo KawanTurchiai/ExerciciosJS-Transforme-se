@@ -1,0 +1,256 @@
+/* ===== RESET ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* ===== VARIÁVEIS DE COR ===== */
+:root {
+    --fundo: #07090f;
+    --card-bg: #0e1117;
+    --card-borda: #1e2535;
+    --verde: #00e5a0;
+    --verde-escuro: #00b07a;
+    --roxo: #7c5cfc;
+    --texto: #c8d0e0;
+    --texto-fraco: #5a6480;
+    --branco: #ffffff;
+}
+
+/* ===== FUNDO COM BOLAS COLORIDAS ===== */
+body {
+    font-family: 'Syne', sans-serif;
+    background-color: var(--fundo);
+    color: var(--texto);
+    min-height: 100vh;
+    padding: 24px 16px 60px;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* Bolas de luz no fundo (efeito decorativo) */
+.bg-blur {
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(100px);
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.18;
+}
+
+.b1 {
+    width: 500px;
+    height: 500px;
+    background: var(--verde);
+    top: -150px;
+    left: -150px;
+}
+
+.b2 {
+    width: 400px;
+    height: 400px;
+    background: var(--roxo);
+    bottom: 100px;
+    right: -100px;
+}
+
+.b3 {
+    width: 300px;
+    height: 300px;
+    background: #00aaff;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* ===== CONTAINER PRINCIPAL ===== */
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+}
+
+/* ===== HEADER ===== */
+header {
+    text-align: center;
+    padding: 40px 0 50px;
+}
+
+.badge {
+    display: inline-block;
+    background: rgba(0, 229, 160, 0.12);
+    color: var(--verde);
+    border: 1px solid rgba(0, 229, 160, 0.3);
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    padding: 6px 18px;
+    border-radius: 999px;
+    margin-bottom: 20px;
+}
+
+h1 {
+    font-size: clamp(2.2rem, 6vw, 3.5rem);
+    font-weight: 800;
+    color: var(--branco);
+    line-height: 1.1;
+    margin-bottom: 14px;
+}
+
+.destaque {
+    color: var(--verde);
+}
+
+.subtitulo {
+    font-size: 1rem;
+    color: var(--texto-fraco);
+    font-family: 'DM Mono', monospace;
+}
+
+/* ===== GRADE DOS CARDS ===== */
+.menu {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 14px;
+}
+
+/* ===== CARD ===== */
+.card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-borda);
+    border-radius: 14px;
+    padding: 22px 20px;
+    cursor: pointer;
+    transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Linha verde no topo do card */
+.card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--verde), var(--roxo));
+    opacity: 0;
+    transition: opacity 0.25s ease;
+}
+
+.card:hover::before {
+    opacity: 1;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(0, 229, 160, 0.25);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+}
+
+/* Número do exercício (ex: "01") */
+.card h3 {
+    font-size: 0.72rem;
+    font-family: 'DM Mono', monospace;
+    color: var(--verde);
+    font-weight: 500;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+    opacity: 0.8;
+}
+
+/* Nome do exercício */
+.card p {
+    font-size: 0.97rem;
+    color: var(--texto);
+    font-weight: 700;
+    line-height: 1.35;
+}
+
+/* ===== ÁREA DE RESULTADO ===== */
+#output-area {
+    margin: 30px 0 20px;
+    background: var(--card-bg);
+    border: 1px solid var(--card-borda);
+    border-radius: 14px;
+    overflow: hidden;
+    display: none;
+}
+
+.output-header {
+    background: #0a0c12;
+    border-bottom: 1px solid var(--card-borda);
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.output-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.8rem;
+    color: var(--verde);
+    letter-spacing: 1px;
+}
+
+#output-texto {
+    padding: 20px 22px;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: #a8c0d0;
+    white-space: pre-wrap;
+    min-height: 100px;
+}
+
+/* ===== BOTÃO VOLTAR ===== */
+#back {
+    display: none;
+    margin-top: 10px;
+    color: var(--verde);
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 700;
+    font-family: 'DM Mono', monospace;
+    letter-spacing: 0.5px;
+    transition: color 0.2s;
+}
+
+#back:hover {
+    color: var(--verde-escuro);
+    text-decoration: underline;
+}
+
+/* ===== RESPONSIVO ===== */
+@media (max-width: 600px) {
+    body {
+        padding: 16px 12px 50px;
+    }
+
+    header {
+        padding: 30px 0 40px;
+    }
+
+    .menu {
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+    }
+
+    .card {
+        padding: 16px 14px;
+    }
+
+    .card p {
+        font-size: 0.88rem;
+    }
+}
+
+@media (max-width: 380px) {
+    .menu {
+        grid-template-columns: 1fr;
+    }
+}
