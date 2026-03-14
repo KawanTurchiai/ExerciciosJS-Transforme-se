@@ -15,7 +15,7 @@ São **66 exercícios** organizados em cards clicáveis, onde cada um roda diret
 
 1. Faça o download ou clone o repositório:
 ```bash
-git clone [https://github.com/seu-usuario/seu-repositorio.git](https://github.com/KawanTurchiai/ExerciciosJS-Transforme-se)
+git clone https://github.com/KawanTurchiai/ExerciciosJS-Transforme-se
 ```
 
 2. Abra o arquivo `index.html` no navegador.
